@@ -1,6 +1,7 @@
 package com.blogspot.waptell.www.forum;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,14 +25,16 @@ public class MAdapter extends RecyclerView.Adapter<MAdapter.ViewHolder> {
         this.context = context;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_list, parent, false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_list,
+                parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         PostModal postModal = listItem.get(position);
         holder.postTitle.setText(postModal.getPost_title());
@@ -44,14 +47,13 @@ public class MAdapter extends RecyclerView.Adapter<MAdapter.ViewHolder> {
         return listItem.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView postTitle;
-        public TextView postDescription;
+        TextView postTitle;
+        TextView postDescription;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
-
             postTitle = itemView.findViewById(R.id.post_title);
             postDescription = itemView.findViewById(R.id.post_description);
         }

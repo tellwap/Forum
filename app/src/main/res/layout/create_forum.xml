@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/create_forum_main"
+    android:orientation="vertical">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:id="@+id/new_forum_title"
+            android:inputType="textMultiLine"
+            android:layout_height="wrap_content"
+            android:hint="@string/mada_mpya_title"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:id="@+id/new_forum_title_forum_description"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:hint="@string/mada_mpya"/>
+    </android.support.design.widget.TextInputLayout>
+</LinearLayout>

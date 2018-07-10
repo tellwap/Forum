@@ -33,7 +33,7 @@ public class Tab2Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tab2, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) view.findViewById(R.id.zote_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

@@ -31,18 +31,18 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
         fab=findViewById(R.id.forum_new);
 
-        tabLayout.getTabAt(0).setText("MZangu");
-        tabLayout.getTabAt(1).setText("Forum");
-        tabLayout.getTabAt(2).setText("profile");
+        tabLayout.getTabAt(0).setText("ZANGU");
+        tabLayout.getTabAt(1).setText("ZOTE");
+        tabLayout.getTabAt(2).setText("MIMI");
 
         tabAction(tabLayout,fab);
 
     }
 
     /**
-     * hide
-     * @param tabLayout
-     * @param fab
+     * hide the float button if not in the tab of my forum
+     * @param tabLayout -
+     * @param fab -
      */
     private void tabAction(final TabLayout tabLayout, final FloatingActionButton fab){
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

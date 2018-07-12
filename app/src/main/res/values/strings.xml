@@ -3,4 +3,10 @@
     <string name="delete_action">delete action</string>
     <string name="post_title">Post Title</string>
     <string name="post_description">Post Description</string>
+    <string name="mada_mpya">Maelezo...</string>
+    <string name="mada_mpya_title">Mada...</string>
+    <string name="clock_time">12:52</string>
+    <string name="jina">Jina</string>
+    <string name="barupepe">Barupepe</string>
+    <string name="chami_epimark">Chami epimark</string>
 </resources>

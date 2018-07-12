@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.blogspot.waptell.www.forum.Tab2Fragment">
+    tools:context="com.blogspot.waptell.www.forum.fragment.Tab2Fragment">
 
    <android.support.v7.widget.RecyclerView
        android:id="@+id/zote_recyclerView"

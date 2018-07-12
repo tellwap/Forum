@@ -1,4 +1,4 @@
-package com.blogspot.waptell.www.forum;
+package com.fahamu.waptell.chat.forum;
 
 import org.junit.Test;
 

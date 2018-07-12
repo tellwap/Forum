@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.blogspot.waptell.www.forum.fragment.Tab3Fragment"
+        tools:context="com.fahamu.waptell.chat.forum.fragment.Tab3Fragment"
         tools:layout_editor_absoluteY="81dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -47,7 +47,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <EditText
-                        android:inputType="text"
+                        android:id="@+id/profile_username"
+                        android:editable="false"
                         android:layout_width="match_parent"
                         android:hint="@string/jina"
                         android:layout_height="wrap_content"
@@ -63,7 +64,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <EditText
-                        android:inputType="text"
+                        android:editable="false"
+                        android:id="@+id/profile_e"
                         android:layout_width="match_parent"
                         android:hint="@string/barupepe"
                         android:layout_height="wrap_content"
@@ -92,7 +94,8 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/profile_image"
             app:layout_constraintTop_toTopOf="@+id/profile_image"
-            app:layout_constraintVertical_bias="0.90999997" />
+            app:layout_constraintVertical_bias="0.90999997"
+            android:focusable="true" />
 
 
     </android.support.constraint.ConstraintLayout>

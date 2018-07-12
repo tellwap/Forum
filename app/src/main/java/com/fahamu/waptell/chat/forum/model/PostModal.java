@@ -1,4 +1,4 @@
-package com.blogspot.waptell.www.forum.model;
+package com.fahamu.waptell.chat.forum.model;
 
 /**
  * Created b y chami on 7/9/18.

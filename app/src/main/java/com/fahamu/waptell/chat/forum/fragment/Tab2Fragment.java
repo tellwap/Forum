@@ -1,4 +1,4 @@
-package com.blogspot.waptell.www.forum.fragment;
+package com.fahamu.waptell.chat.forum.fragment;
 
 
 import android.os.Bundle;
@@ -9,10 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.blogspot.waptell.www.forum.R;
-import com.blogspot.waptell.www.forum.adapter.ZanguAdapter;
-import com.blogspot.waptell.www.forum.adapter.ZoteAdapter;
-import com.blogspot.waptell.www.forum.model.PostModal;
+import com.fahamu.waptell.chat.forum.R;
+import com.fahamu.waptell.chat.forum.adapter.ZanguAdapter;
+import com.fahamu.waptell.chat.forum.adapter.ZoteAdapter;
+import com.fahamu.waptell.chat.forum.database.FirestoreUtils;
+import com.fahamu.waptell.chat.forum.model.PostModal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,8 @@ public class Tab2Fragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<PostModal> listItems;
+
+    private FirestoreUtils firestoreUtils = new FirestoreUtils();
 
     public Tab2Fragment() {
         // Required empty public constructor
@@ -42,28 +45,10 @@ public class Tab2Fragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        listItems = new ArrayList<>();
-
-        //for test purpose
-        //test recycler view
-        for (int i=0; i<10; i++){
-
-            PostModal postModal = new PostModal(
-                    "post title",
-                    "post description","post title",
-                    "post description"
-            );
-            listItems.add(postModal);
-        }
-
-        adapter = new ZoteAdapter(listItems, getActivity());
-        recyclerView.setAdapter(adapter);
-
-
+        firestoreUtils.getAllPosts(recyclerView,getContext());
 
         return view;
     }
-
 
 
 }

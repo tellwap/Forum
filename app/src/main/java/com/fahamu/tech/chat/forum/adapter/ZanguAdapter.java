@@ -1,4 +1,4 @@
-package com.blogspot.waptell.www.forum.adapter;
+package com.fahamu.tech.chat.forum.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,13 +17,23 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.blogspot.waptell.www.forum.ChatActivity;
-import com.blogspot.waptell.www.forum.model.PostModal;
-import com.blogspot.waptell.www.forum.R;
+import com.bumptech.glide.Glide;
+import com.fahamu.tech.chat.forum.ChatActivity;
+import com.fahamu.tech.chat.forum.database.FirestoreUtils;
+import com.fahamu.tech.chat.forum.model.Post;
+import com.fahamu.tech.chat.forum.model.PostModal;
+import com.fahamu.tech.chat.forum.R;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.github.javiersantos.materialstyleddialogs.enums.Style;
+import com.google.firebase.auth.FirebaseAuth;
 
+import org.w3c.dom.Text;
+
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by chami o n 7/9/18.
@@ -31,10 +41,11 @@ import java.util.List;
 
 public class ZanguAdapter extends RecyclerView.Adapter<ZanguAdapter.ViewHolder> {
 
-    private List<PostModal> listItem;
+    private List<Post> listItem;
     private Context context;
+    private FirestoreUtils firestoreUtils=new FirestoreUtils();
 
-    public ZanguAdapter(List<PostModal> listItem, Context context) {
+    public ZanguAdapter(List<Post> listItem, Context context) {
         this.listItem = listItem;
         this.context = context;
     }
@@ -50,9 +61,18 @@ public class ZanguAdapter extends RecyclerView.Adapter<ZanguAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        PostModal postModal = listItem.get(position);
-        holder.postTitle.setText(postModal.getPost_title());
-        holder.postDescription.setText(postModal.getPost_description());
+        Post postModal = listItem.get(position);
+        holder.postTitle.setText(postModal.getTitle());
+        holder.postDescription.setText(postModal.getDescription());
+        long t= Long.parseLong(postModal.getTime());
+        Date date =new Date(t);
+        Calendar instance = Calendar.getInstance();
+        instance.setTime(date);
+        holder.docId.setText(postModal.getDocId());
+        //holder.time.setText(instance.get(Calendar.HOUR_OF_DAY));
+
+        Glide.with(context).load(postModal.getUserPhoto())
+                .into(holder.circleImageView);
 
     }
 
@@ -65,14 +85,24 @@ public class ZanguAdapter extends RecyclerView.Adapter<ZanguAdapter.ViewHolder> 
 
         TextView postTitle;
         TextView postDescription;
+        TextView time;
+        TextView docId;
+        CircleImageView circleImageView;
 
         ViewHolder(final View itemView) {
             super(itemView);
             postTitle = itemView.findViewById(R.id.post_title);
             postDescription = itemView.findViewById(R.id.post_description);
+            this.time=itemView.findViewById(R.id.forum_time);
+            this.docId=itemView.findViewById(R.id.post_id);
+            this.circleImageView=itemView.findViewById(R.id.profile_image);
 
             itemView.setOnClickListener(v1 -> {
-                context.startActivity(new Intent(context, ChatActivity.class));
+                Intent intent = new Intent(context, ChatActivity.class);
+                intent.putExtra("title",postTitle.getText());
+                intent.putExtra("description",postDescription.getText());
+                intent.putExtra("docId",docId.getText());
+                context.startActivity(intent);
             });
 
             itemView.setOnLongClickListener(v -> {
@@ -88,23 +118,18 @@ public class ZanguAdapter extends RecyclerView.Adapter<ZanguAdapter.ViewHolder> 
                     }
                 }
                 Snackbar.make(itemView, "Futa ujumbe", Toast.LENGTH_SHORT).show();
-//                    if (itemView.isSelected())
-//                        itemView.setBackgroundColor(itemView.getContext().getResources().getColor(R.color.primary_dark));
-//                    else
-//                        itemView.setBackgroundColor(Color.parseColor("#ffffff"));
+
                 new MaterialStyledDialog.Builder(context)
                         .setDescription("Kubali Kufuta Ujumbe Wako")
                         .setStyle(Style.HEADER_WITH_ICON)
                         .setIcon(R.drawable.ic_delete_black_24dp)
                         .setPositiveText("KUBALI")
                         .setNegativeText("KATAA")
-                        .onPositive(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                //TODO: delete from firestore
-                                //Log.e("TAG******","Umefua");
-                                Snackbar.make(itemView, "Ujumbe umefutwa", Toast.LENGTH_SHORT).show();
-                            }
+                        .onPositive((dialog, which) -> {
+                            //TODO: delete from firestor
+                            firestoreUtils.deletePost(docId.getText().toString());
+                            //Log.e("TAG******","Umefua");
+                            Snackbar.make(itemView, "Ujumbe umefutwa", Toast.LENGTH_SHORT).show();
                         }).onNegative((dialog, which) -> {
                     Snackbar.make(itemView, "Umegairi Kufuta ujumbe", Toast.LENGTH_SHORT).show();
                 }).show();

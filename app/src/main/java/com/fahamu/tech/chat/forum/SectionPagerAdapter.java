@@ -1,4 +1,4 @@
-package com.blogspot.waptell.www.forum;
+package com.fahamu.tech.chat.forum;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

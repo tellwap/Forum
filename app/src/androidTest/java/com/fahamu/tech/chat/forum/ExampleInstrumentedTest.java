@@ -1,4 +1,4 @@
-package com.blogspot.waptell.www.forum;
+package com.fahamu.tech.chat.forum;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

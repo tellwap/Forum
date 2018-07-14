@@ -10,7 +10,9 @@ import com.fahamu.tech.chat.forum.model.Messages;
 import com.fahamu.tech.chat.forum.model.Post;
 import com.fahamu.tech.chat.forum.model.User;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -71,35 +73,67 @@ public class FirestoreUtils {
     }
 
     public void myPost(String id, RecyclerView recyclerView, Context context) {
-        Query userId = firestore.collection(ForumC.FORUMS.name())
-                .orderBy("time", Query.Direction.DESCENDING)
-                .whereEqualTo("userId",id);
-        userId.get().addOnSuccessListener(queryDocumentSnapshots -> {
-            List<Post> posts = new ArrayList<>();
 
-            if (queryDocumentSnapshots != null)
-                posts = queryDocumentSnapshots.toObjects(Post.class);
+//        Query userId = firestore.collection(ForumC.FORUMS.name())
+//                .orderBy("time", Query.Direction.DESCENDING)
+//                .whereEqualTo("userId",id);
+//        userId.get().addOnSuccessListener(queryDocumentSnapshots -> {
+//            List<Post> posts = new ArrayList<>();
+//
+//            if (queryDocumentSnapshots != null)
+//                posts = queryDocumentSnapshots.toObjects(Post.class);
+//
+//
+//
+//
+//            Log.e("TAG****POST","Loading");
+//
+//
+//        });
+
+        firestore.collection(ForumC.FORUMS.name()).orderBy("time", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+
+                List<Post> posts = new ArrayList<>();
+                if (queryDocumentSnapshots != null) {
+                for (QueryDocumentSnapshot documentChange : queryDocumentSnapshots){
 
 
-            RecyclerView.Adapter adapter;
-            adapter = new ZanguAdapter(posts,context);
-            recyclerView.setAdapter(adapter);
 
-            Log.e("TAG****POST","Loading");
+                                String uid = documentChange.getString("userId");
+                                if (uid != null) {
+                                    if (uid.equals(FirebaseAuth.getInstance().getUid()))
+                                        posts.add(documentChange.toObject(Post.class));
+                                }
 
+                            }
+                            RecyclerView.Adapter adapter;
+                            adapter = new ZanguAdapter(posts, context);
+                            recyclerView.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
 
-        });
-
-        firestore.collection(ForumC.FORUMS.name())
-                .whereEqualTo("userId",id)
-                .addSnapshotListener((queryDocumentSnapshots, e) -> {
-            if (queryDocumentSnapshots!=null){
-                List<Post> posts = queryDocumentSnapshots.toObjects(Post.class);
-                ZanguAdapter zanguAdapter=new ZanguAdapter(posts,context);
-                recyclerView.setAdapter(zanguAdapter);
-
+                    }
             }
         });
+
+
+
+
+//        firestore.collection(ForumC.FORUMS.name()).orderBy("time", Query.Direction.DESCENDING)
+//                .whereEqualTo("userId",id)
+//                .addSnapshotListener((queryDocumentSnapshots, e) -> {
+//
+//                 //check if the document is added
+//                    if (queryDocumentSnapshots.getDocumentChanges() != null) {
+//                        List<Post> posts = queryDocumentSnapshots.toObjects(Post.class);
+//                        RecyclerView.Adapter adapter;
+//                        adapter = new ZanguAdapter(posts, context);
+//                        recyclerView.setAdapter(adapter);
+//                    }
+//
+//        });
+
     }
 
     public void deletePost(String docId){
@@ -116,31 +150,37 @@ public class FirestoreUtils {
     }
 
     public void receiveMessgae(String docId, ChatView chatView,String senderId){
-        CollectionReference collection = firestore.collection(ForumC.FORUMS.name()).document(docId)
-                .collection(ForumC.FORUM_MESSAGE.name());
-        collection.orderBy("time");
-        collection.get().addOnSuccessListener(queryDocumentSnapshots -> {
 
 
-            List<Messages> m;
+        firestore.collection(ForumC.FORUMS.name()).document(docId)
+                .collection(ForumC.FORUM_MESSAGE.name()).orderBy("time",
+                Query.Direction.ASCENDING).addSnapshotListener((queryDocumentSnapshots, e) -> {
 
-            if (queryDocumentSnapshots!=null){
-                m = queryDocumentSnapshots.toObjects(Messages.class);
-                for (Messages messages : m) {
-                    ChatMessage chatMessage;
-                    if (senderId.equals(messages.getSenderId())) {
-                        chatMessage = new ChatMessage(messages.getMessage(),
-                                Long.valueOf(messages.getTime()), ChatMessage.Type.SENT);
-                    } else {
-                        chatMessage = new ChatMessage(messages.getMessage(),
-                                Long.valueOf(messages.getTime()), ChatMessage.Type.RECEIVED);
-                    }
+                    if (queryDocumentSnapshots!=null){
 
-                    chatView.addMessage(chatMessage);
-                }
-            }
+                    for (DocumentChange documentChange : queryDocumentSnapshots.getDocumentChanges())
 
-        });
+                        if (documentChange.getType() == DocumentChange.Type.ADDED) {
+
+                            List<Messages> m = queryDocumentSnapshots.toObjects(Messages.class);
+                            chatView.clearMessages();
+                                for (Messages messages : m) {
+                                    ChatMessage chatMessage;
+                                    if (senderId.equals(messages.getSenderId())) {
+                                        chatMessage = new ChatMessage(messages.getMessage(),
+                                                Long.valueOf(messages.getTime()), ChatMessage.Type.SENT);
+                                    } else {
+                                        chatMessage = new ChatMessage(messages.getMessage(),
+                                                Long.valueOf(messages.getTime()), ChatMessage.Type.RECEIVED);
+                                    }
+
+
+                                    chatView.addMessage(chatMessage);
+                                }
+                            }
+
+                        }
+                });
 
 
 //        collection.addSnapshotListener((queryDocumentSnapshots, e) -> {
@@ -168,34 +208,54 @@ public class FirestoreUtils {
 
 
     public void getAllPosts(RecyclerView recyclerView, Context context){
-        Query userId = firestore.collection(ForumC.FORUMS.name())
-                .orderBy("time", Query.Direction.DESCENDING);
+//        Query userId = firestore.collection(ForumC.FORUMS.name())
+//                .orderBy("time", Query.Direction.DESCENDING);
+//
+//        userId.get().addOnSuccessListener(queryDocumentSnapshots -> {
+//            List<Post> posts = new ArrayList<>();
+//
+//            if (queryDocumentSnapshots != null)
+//                posts = queryDocumentSnapshots.toObjects(Post.class);
+//
+//
+//            RecyclerView.Adapter adapter;
+//            adapter = new ZoteAdapter(posts,context);
+//            recyclerView.setAdapter(adapter);
+//
+//            Log.e("TAG****POST","Loading");
+//
 
-        userId.get().addOnSuccessListener(queryDocumentSnapshots -> {
-            List<Post> posts = new ArrayList<>();
+ //       });
 
-            if (queryDocumentSnapshots != null)
-                posts = queryDocumentSnapshots.toObjects(Post.class);
+//        firestore.collection(ForumC.FORUMS.name())
+//                .addSnapshotListener((queryDocumentSnapshots, e) -> {
+//                    if (queryDocumentSnapshots!=null){
+//                        List<Post> posts = queryDocumentSnapshots.toObjects(Post.class);
+//                        ZanguAdapter zanguAdapter=new ZanguAdapter(posts,context);
+//                        recyclerView.setAdapter(zanguAdapter);
+//
+//                    }
+//                });
 
+        firestore.collection(ForumC.FORUMS.name()).orderBy("time", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
 
-            RecyclerView.Adapter adapter;
-            adapter = new ZoteAdapter(posts,context);
-            recyclerView.setAdapter(adapter);
+                for (DocumentChange documentChange : queryDocumentSnapshots.getDocumentChanges())
 
-            Log.e("TAG****POST","Loading");
+                    if (documentChange.getType() == DocumentChange.Type.ADDED) {
 
-
-        });
-
-        firestore.collection(ForumC.FORUMS.name())
-                .addSnapshotListener((queryDocumentSnapshots, e) -> {
-                    if (queryDocumentSnapshots!=null){
                         List<Post> posts = queryDocumentSnapshots.toObjects(Post.class);
-                        ZanguAdapter zanguAdapter=new ZanguAdapter(posts,context);
-                        recyclerView.setAdapter(zanguAdapter);
+
+                        RecyclerView.Adapter adapter;
+                        adapter = new ZoteAdapter(posts, context);
+                        recyclerView.setAdapter(adapter);
+                       // adapter.notifyDataSetChanged();
+
 
                     }
-                });
+            }
+        });
     }
 
 

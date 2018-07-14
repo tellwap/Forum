@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.fahamu.waptell.chat.forum.fragment.Tab3Fragment"
+        tools:context="com.fahamu.tech.chat.forum.fragment.Tab3Fragment"
         tools:layout_editor_absoluteY="81dp">
 
         <de.hdodenhof.circleimageview.CircleImageView

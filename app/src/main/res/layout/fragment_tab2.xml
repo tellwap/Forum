@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fahamu.waptell.chat.forum.fragment.Tab2Fragment">
+    tools:context="com.fahamu.tech.chat.forum.fragment.Tab2Fragment">
 
    <android.support.v7.widget.RecyclerView
        android:id="@+id/zote_recyclerView"

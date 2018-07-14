@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
                     .setPositiveText("TUMA")
                     .setNegativeText("GHAIRI")
                     .onPositive((dialog, which) -> {
-                   
+
                     }).onNegative((dialog, which) -> {
                         Snackbar.make(mViewPager,"Umeghairisha...",Snackbar.LENGTH_SHORT).show();
                     }).setCancelable(false)

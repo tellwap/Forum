@@ -1,0 +1,115 @@
+{
+  "project_info": {
+    "project_number": "241215850596",
+    "firebase_url": "https://kilimoutabirioriginal.firebaseio.com",
+    "project_id": "kilimoutabirioriginal",
+    "storage_bucket": "kilimoutabirioriginal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241215850596:android:f2712584f5cd8518",
+        "android_client_info": {
+          "package_name": "com.blogspot.waptell.www.forum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "241215850596-mh1hajfoae5reokvmvf6n1sih7ab0opo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.blogspot.waptell.www.forum",
+            "certificate_hash": "4c5362e68718f8d5145dc3d80510701b995bc28d"
+          }
+        },
+        {
+          "client_id": "241215850596-1f417sml8q9p5na2g4s029tsq1gvppsc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbfReh4WSO2E6DfREhCwNS9W1FsyF8NZE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "241215850596-bh96oq254o73acfv18auih7dt6ihsca4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241215850596:android:19a57016b49b8e4c",
+        "android_client_info": {
+          "package_name": "com.cardeanutrition.kilimoutabiri"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "241215850596-e9dbi8vci0nkuaqlp29oliv1j2hj3mtp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cardeanutrition.kilimoutabiri",
+            "certificate_hash": "3a7e1ea804fe279612662c67c28af5ff892fa682"
+          }
+        },
+        {
+          "client_id": "241215850596-efq671g2b48fhprm7dd52g3jedph3kvj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cardeanutrition.kilimoutabiri",
+            "certificate_hash": "0f01dde4e743837a5199c505ce482de099cec4ce"
+          }
+        },
+        {
+          "client_id": "241215850596-bkigj7a69ss1j20m47ctdi0pk5429iub.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cardeanutrition.kilimoutabiri",
+            "certificate_hash": "e2fe457cf7076ba032994239fd177011b1a83ac3"
+          }
+        },
+        {
+          "client_id": "241215850596-1f417sml8q9p5na2g4s029tsq1gvppsc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbfReh4WSO2E6DfREhCwNS9W1FsyF8NZE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "241215850596-bh96oq254o73acfv18auih7dt6ihsca4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

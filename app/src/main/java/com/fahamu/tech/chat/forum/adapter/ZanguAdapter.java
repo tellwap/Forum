@@ -19,6 +19,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.fahamu.tech.chat.forum.ChatActivity;
+import com.fahamu.tech.chat.forum.GetTimeAgo;
 import com.fahamu.tech.chat.forum.database.FirestoreUtils;
 import com.fahamu.tech.chat.forum.model.Post;
 import com.fahamu.tech.chat.forum.model.PostModal;
@@ -44,6 +45,7 @@ public class ZanguAdapter extends RecyclerView.Adapter<ZanguAdapter.ViewHolder> 
     private List<Post> listItem;
     private Context context;
     private FirestoreUtils firestoreUtils=new FirestoreUtils();
+    private GetTimeAgo getTimeAgo;
 
     public ZanguAdapter(List<Post> listItem, Context context) {
         this.listItem = listItem;
@@ -55,6 +57,8 @@ public class ZanguAdapter extends RecyclerView.Adapter<ZanguAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_list,
                 parent, false);
+
+        getTimeAgo = new GetTimeAgo();
         return new ViewHolder(view);
     }
 
@@ -69,7 +73,7 @@ public class ZanguAdapter extends RecyclerView.Adapter<ZanguAdapter.ViewHolder> 
         Calendar instance = Calendar.getInstance();
         instance.setTime(date);
         holder.docId.setText(postModal.getDocId());
-        //holder.time.setText(instance.get(Calendar.HOUR_OF_DAY));
+        holder.time.setText(getTimeAgo.getTimeAgo(Long.parseLong(postModal.getTime()),context));
 
         Glide.with(context).load(postModal.getUserPhoto())
                 .into(holder.circleImageView);

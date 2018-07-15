@@ -60,7 +60,7 @@ public class ChatActivity extends AppCompatActivity {
         firestoreUtils.receiveMessgae(docId,chatView,senderId);
 
 
-        new MessageUtils().subscribe(docId);
+        //new MessageUtils().subscribe(docId);
     }
 
 
@@ -71,14 +71,14 @@ public class ChatActivity extends AppCompatActivity {
             Log.e("TAG***SEND SMS", chatMessage.getMessage());
 
             //send message using fcm
-            RemoteMessage remoteMessage=new RemoteMessage.Builder(docId + "@gcm.googleapis.com")
-                    .setMessageId(String.valueOf(new Date().getTime()))
-                    .addData("message",chatMessage.getMessage())
-                    .addData("senderId",senderId)
-                    .build();
+//            RemoteMessage remoteMessage=new RemoteMessage.Builder(docId + "@gcm.googleapis.com")
+//                    .setMessageId(String.valueOf(new Date().getTime()))
+//                    .addData("message",chatMessage.getMessage())
+//                    .addData("senderId",senderId)
+//                    .build();
 
 
-            messageUtils.sendFCMessage(remoteMessage);
+            //messageUtils.sendFCMessage(remoteMessage);
 
 
             firestoreUtils.sendMessage(docId,

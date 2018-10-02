@@ -34,6 +34,8 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="wrap_content"
+                    android:layout_margin="4dp"
+                    android:id="@+id/profile_image"
                     android:layout_height="100dp"
                     android:src="@drawable/ch"/>
 
@@ -42,7 +44,7 @@
                     android:layout_height="wrap_content">
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
-                        android:id="@+id/sigup_fullname"
+                        android:id="@+id/profile_fullname"
                         android:focusable="false"
                         android:editable="false"
                         android:layout_height="wrap_content"
@@ -56,7 +58,7 @@
                     android:layout_height="wrap_content">
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
-                        android:id="@+id/sigup_email"
+                        android:id="@+id/profile_email"
                         android:editable="false"
                         android:focusable="false"
                         android:text="@string/email_example_com"
@@ -70,7 +72,7 @@
                     android:layout_height="wrap_content">
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
-                        android:id="@+id/sigup_phone"
+                        android:id="@+id/profile_phone"
                         android:layout_height="wrap_content"
                         android:inputType="phone"
                         android:hint="@string/phone"/>
@@ -81,7 +83,7 @@
                     android:layout_height="wrap_content">
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
-                        android:id="@+id/sigup_address"
+                        android:id="@+id/profile_address"
                         android:layout_height="wrap_content"
                         android:inputType="textMultiLine"
                         android:lines="4"
@@ -92,6 +94,7 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/profile_update_profile"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_gravity="center"
                     android:text="@string/update"/>
@@ -126,9 +129,17 @@
                    style="@style/TextAppearance.AppCompat.Headline"
                    android:textAlignment="center"
                    android:textAllCaps="true"
-                   android:textSize="32sp"
                    android:layout_height="wrap_content"
-                   android:text="@string/tsz_0"/>
+                   android:text="@string/tzs"/>
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:id="@+id/profile_amount"
+                   android:textAlignment="center"
+                   android:textSize="32sp"
+                   style="@style/TextAppearance.AppCompat.Headline"
+                   android:layout_height="wrap_content"
+                   android:text="@string/_10000"/>
 
                <android.support.design.widget.TextInputLayout
                    android:layout_width="match_parent"
@@ -136,7 +147,7 @@
                    <android.support.design.widget.TextInputEditText
                        android:layout_width="match_parent"
                        android:inputType="text"
-                       android:id="@+id/signup_subscription"
+                       android:id="@+id/profile_subscription"
                        android:hint="@string/type"
                        android:editable="false"
                        android:focusable="false"
@@ -151,6 +162,7 @@
                    <android.support.design.widget.TextInputEditText
                        android:layout_width="match_parent"
                        android:hint="@string/status"
+                       android:id="@+id/profile_status"
                        android:focusable="false"
                        android:editable="false"
                        android:text="@string/expire"

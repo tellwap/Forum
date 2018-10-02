@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,11 +13,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.fahamu.tech.chat.forum.config.Config;
 import com.fahamu.tech.chat.forum.database.NoSqlDatabase;
+import com.fahamu.tech.chat.forum.model.Receipt;
 import com.fahamu.tech.chat.forum.model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -38,6 +42,22 @@ public class ProfileActivity extends AppCompatActivity {
     Toolbar toolbar;
     @BindView(R.id.fab)
     FloatingActionButton fab;
+    @BindView(R.id.profile_phone)
+    TextInputEditText phoneEdotText;
+    @BindView(R.id.profile_address)
+    TextInputEditText addressTextEdit;
+    @BindView(R.id.profile_update_profile)
+    Button updateProfileButton;
+    @BindView(R.id.profile_amount)
+    TextView amountTextView;
+    @BindView(R.id.profile_subscription)
+    TextInputEditText subscriptionTextEdit;
+    @BindView(R.id.profile_status)
+    TextInputEditText statusTextEdit;
+    @BindView(R.id.profile_payment)
+    Button payButton;
+    @BindView(R.id.profile_payment_history)
+    Button receiptButton;
 
 
     @Override
@@ -58,8 +78,24 @@ public class ProfileActivity extends AppCompatActivity {
         //for testing
         contactUs();
 
+        //listener
+        buttons();
+
     }
 
+    private void buttons() {
+        receiptButton.setOnClickListener(v -> {
+            startActivity(new Intent(this, ReceiptsActivity.class));
+        });
+
+        payButton.setOnClickListener(v -> {
+            startActivity(new Intent(this, PayActivity.class));
+        });
+
+        updateProfileButton.setOnClickListener(v -> {
+            Snackbar.make(v, "Update profile", Snackbar.LENGTH_SHORT).show();
+        });
+    }
 
     private void contactUs() {
         fab.setOnClickListener(view ->

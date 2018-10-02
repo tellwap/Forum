@@ -41,4 +41,9 @@
     <string name="sigin_up_image">sigin up image</string>
     <string name="term_and_conditions">Terms And Conditions</string>
     <string name="agree_and_sign_in">Agree And Sign In</string>
+    <string name="title_activity_pay">PayActivity</string>
+    <string name="title_activity_receipts">ReceiptsActivity</string>
+    <string name="tzs">TZS</string>
+    <string name="tz">TZ</string>
+    <string name="_10000">10,000</string>
 </resources>

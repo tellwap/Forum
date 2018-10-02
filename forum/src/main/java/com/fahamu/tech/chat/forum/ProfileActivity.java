@@ -11,7 +11,7 @@ import android.view.View;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SignInActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;

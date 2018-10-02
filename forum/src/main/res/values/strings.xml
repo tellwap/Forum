@@ -10,7 +10,7 @@
     <string name="barupepe">Barupepe</string>
     <string name="chami_epimark">Chami epimark</string>
     <string name="description">description</string>
-    <string name="title_activity_sign_in">SignInActivity</string>
+    <string name="title_activity_sign_in">Profile</string>
     <string name="profile">Profile</string>
     <string name="title_activity_my_chat">MyChatActivity</string>
     <string name="message">Message…</string>
@@ -30,4 +30,10 @@
     <string name="subscription">Subscription</string>
     <string name="type">Type</string>
     <string name="free">Free</string>
+    <string name="update">Update Profile</string>
+    <string name="tsz_0">TZS 0</string>
+    <string name="status">Status</string>
+    <string name="expire">Account expire</string>
+    <string name="pay">Pay</string>
+    <string name="pay_history">Receipts</string>
 </resources>

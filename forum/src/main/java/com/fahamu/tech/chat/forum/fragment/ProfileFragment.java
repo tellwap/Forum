@@ -41,14 +41,15 @@ public class ProfileFragment extends Fragment {
         CircleImageView image = view.findViewById(R.id.profile_image);
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (getContext() != null) {
-            Glide.with(getContext()).load(currentUser.getPhotoUrl())
-                    .into(image);
-        }
+        if (currentUser != null) {
+            if (getContext() != null) {
+                Glide.with(getContext()).load(currentUser.getPhotoUrl())
+                        .into(image);
+            }
 
-        assert currentUser != null;
-        name.setText(currentUser.getDisplayName());
-        email.setText(currentUser.getEmail());
+            name.setText(currentUser.getDisplayName());
+            email.setText(currentUser.getEmail());
+        }
 
     }
 }

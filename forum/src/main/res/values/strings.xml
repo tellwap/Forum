@@ -36,4 +36,5 @@
     <string name="expire">Account expire</string>
     <string name="pay">Pay</string>
     <string name="pay_history">Receipts</string>
+    <string name="logout">Logout</string>
 </resources>

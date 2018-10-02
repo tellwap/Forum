@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.fahamu.tech.chat.forum.database.NoSqlDatabase;
 import com.fahamu.tech.chat.forum.fragment.MyChatFragment;
@@ -42,22 +43,9 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
     private ViewPager mViewPager;
-    private int RC_SIGN_IN = 221;
-    private GoogleSignInClient mGoogleSignInClient;
-    private FirebaseAuth mAuth;
     private NoSqlDatabase noSqlDatabase;
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            startActivity(new Intent(this, ProfileActivity.class));
-            finish();
-            // signIn();
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +57,33 @@ public class MainActivity extends AppCompatActivity {
         //initiate database
         noSqlDatabase = new NoSqlDatabase();
 
+        //render the view
         iniUI();
+        //check if user is exist
+        checkIdLogin();
     }
 
+    @Override
+    protected void onResume() {
+        checkIdLogin();
+        super.onResume();
+    }
+
+    /**
+     * check if user is exist in firebase
+     */
+    private void checkIdLogin(){
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            Toast.makeText(this,"Please login firest",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, ProfileActivity.class));
+            //finish();
+            // signIn();
+        }
+    }
+
+    /**
+     * render the chat view
+     */
     private void iniUI() {
         mViewPager = findViewById(R.id.container_view);
         setupViewPager(mViewPager);
@@ -82,79 +94,18 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.getTabAt(0).setText("MY CHARTS");
         tabLayout.getTabAt(1).setText("ALL CHARTS");
-        tabLayout.getTabAt(2).setText("PROFILE");
 
+        //fab listener
         tabAction(tabLayout, fab);
         createForum(fab, this);
 
     }
 
-    private void initSignIn() {
-        // Configure Google Sign In
-        mAuth = FirebaseAuth.getInstance();
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
 
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-    }
+    /**
+     * sigin in using google account
+     */
 
-    private void signIn() {
-        initSignIn();
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
-            } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e);
-                // ...
-            }
-        }
-    }
-
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
-
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.e(TAG, "signInWithCredential:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        noSqlDatabase.createUser(new User(
-                                user.getDisplayName(),
-                                user.getEmail(),
-                                mAuth.getUid(),
-                                user.getPhotoUrl().toString()
-                        ));
-                        //updateUI(user);
-                        iniUI();
-
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.e(TAG, "signInWithCredential:failure", task.getException());
-                        //Snackbar.make(mViewPager, "Authentication Failed.",
-                        //Snackbar.LENGTH_SHORT).show();
-                        //updateUI(null);
-                    }
-
-                    // ...
-                });
-    }
 
     /**
      * hide the float button if not in the tab of my forum
@@ -198,6 +149,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * create the new topic
+     * @param fab the to initiate the popup
+     * @param context the activity
+     */
     private void createForum(FloatingActionButton fab, Context context) {
 
         fab.setOnClickListener(v -> {
@@ -253,11 +209,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * set up the viewer page to use with tab layout
+     * @param mViewPager the viewer pager
+     */
     private void setupViewPager(ViewPager mViewPager) {
         SectionPagerAdapter adapter = new SectionPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new MyChatFragment());
         adapter.addFragment(new AllChartFragment());
-        adapter.addFragment(new ProfileFragment());
         mViewPager.setAdapter(adapter);
     }
 
@@ -272,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_profile:
-                Snackbar.make(item.getActionView(), "Menu clicked", Snackbar.LENGTH_SHORT).show();
+                startActivity(new Intent(this, ProfileActivity.class));
                 return true;
 
             default:

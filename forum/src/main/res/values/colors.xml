@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1ac20a</color>
-    <color name="colorPrimaryDark">#0bb422</color>
-    <color name="colorAccent">#d90f0f</color>
+    <color name="colorPrimary">#8f10ce</color>
+    <color name="colorPrimaryDark">#7f0bb1</color>
+    <color name="colorAccent">#b311d7</color>
     <color name="primary_dark">#3e3e3e</color>
     <color name="gray">#b4b4b4</color>
     <color name="message_card_color">#d1ffd4</color>
+    <color name="white">#fff</color>
+    <color name="dark_gray">#919191</color>
 </resources>

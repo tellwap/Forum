@@ -43,6 +43,8 @@
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
                         android:id="@+id/sigup_fullname"
+                        android:focusable="false"
+                        android:editable="false"
                         android:layout_height="wrap_content"
                         android:text="@string/name"
                         android:inputType="text"
@@ -93,7 +95,6 @@
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_gravity="center"
                     android:text="@string/update"/>
-
 
             </LinearLayout>
 

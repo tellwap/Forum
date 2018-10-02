@@ -8,9 +8,6 @@ import android.widget.TextView;
 
 import com.fahamu.tech.chat.forum.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class MyChatViewHolder extends RecyclerView.ViewHolder {
 
     private CardView cardViewSender;

@@ -23,21 +23,10 @@ import android.widget.Toast;
 import com.fahamu.tech.chat.forum.database.NoSqlDatabase;
 import com.fahamu.tech.chat.forum.fragment.MyChatFragment;
 import com.fahamu.tech.chat.forum.fragment.AllChartFragment;
-import com.fahamu.tech.chat.forum.fragment.ProfileFragment;
 import com.fahamu.tech.chat.forum.model.Post;
-import com.fahamu.tech.chat.forum.model.User;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.github.javiersantos.materialstyleddialogs.enums.Style;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.Date;
 
@@ -46,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private NoSqlDatabase noSqlDatabase;
 
+    @Override
+    protected void onStart() {
+        checkIsLogin();
+        super.onStart();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,24 +54,23 @@ public class MainActivity extends AppCompatActivity {
         //render the view
         iniUI();
         //check if user is exist
-        checkIdLogin();
+       checkIsLogin();
     }
 
     @Override
     protected void onResume() {
-        checkIdLogin();
+        checkIsLogin();
         super.onResume();
     }
 
     /**
      * check if user is exist in firebase
      */
-    private void checkIdLogin(){
+    private void checkIsLogin(){
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             Toast.makeText(this,"Please login firest",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, ProfileActivity.class));
+            startActivity(new Intent(this, SignUpActivity.class));
             //finish();
-            // signIn();
         }
     }
 
@@ -101,12 +94,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    /**
-     * sigin in using google account
-     */
-
-
     /**
      * hide the float button if not in the tab of my forum
      *
@@ -114,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
      * @param fab       -
      */
     private void tabAction(final TabLayout tabLayout, final FloatingActionButton fab) {
-        if (mViewPager != null) mViewPager.setCurrentItem(1);
+       // if (mViewPager != null) mViewPager.setCurrentItem(0);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -159,14 +146,14 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(v -> {
             @SuppressLint("InflateParams") LinearLayout view = (LinearLayout) LayoutInflater
                     .from(this).inflate(R.layout.create_forum, null);
-            Log.e("TAG***VIEW", view.toString());
+
             MaterialStyledDialog show = new MaterialStyledDialog.Builder(context)
                     .setStyle(Style.HEADER_WITH_ICON)
                     .setIcon(R.drawable.ic_mode_edit_black_48dp)
                     .setCustomView(view, 20, 20, 20, 20)
                     .setScrollable(true)
-                    .setPositiveText("TUMA")
-                    .setNegativeText("GHAIRI")
+                    .setPositiveText("Ok")
+                    .setNegativeText("Cancel")
                     .onPositive((dialog, which) -> {
                         if (dialog.getCustomView() != null) {
                             EditText editText = dialog.getCustomView()

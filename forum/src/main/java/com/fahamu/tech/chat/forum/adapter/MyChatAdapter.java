@@ -8,7 +8,6 @@ import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.fahamu.tech.chat.forum.ChatActivity;
 import com.fahamu.tech.chat.forum.GetTimeAgo;
+import com.fahamu.tech.chat.forum.MyChatActivity;
+import com.fahamu.tech.chat.forum.R;
 import com.fahamu.tech.chat.forum.database.NoSqlDatabase;
 import com.fahamu.tech.chat.forum.model.Post;
-import com.fahamu.tech.chat.forum.R;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.github.javiersantos.materialstyleddialogs.enums.Style;
 
@@ -96,7 +95,7 @@ public class MyChatAdapter extends RecyclerView.Adapter<MyChatAdapter.ViewHolder
             this.circleImageView=itemView.findViewById(R.id.profile_image);
 
             itemView.setOnClickListener(v1 -> {
-                Intent intent = new Intent(context, ChatActivity.class);
+                Intent intent = new Intent(context, MyChatActivity.class);
                 intent.putExtra("title",postTitle.getText());
                 intent.putExtra("description",postDescription.getText());
                 intent.putExtra("docId",docId.getText());
@@ -104,7 +103,7 @@ public class MyChatAdapter extends RecyclerView.Adapter<MyChatAdapter.ViewHolder
             });
 
             itemView.setOnLongClickListener(v -> {
-                Log.e("TAG******", " I am clicked");
+
                 Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
                 if (vibrator != null) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

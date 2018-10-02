@@ -33,16 +33,16 @@
             android:contentDescription="@string/description"
             android:layout_height="match_parent" />
 
-        <co.intentservice.chatui.ChatView
-            android:id="@+id/chat_view"
-            chatview:bubbleElevation="flat"
-            chatview:backgroundSend="#00f4f4f4"
-            chatview:sendBtnBackgroundTint="@color/colorPrimaryDark"
-            chatview:backgroundRcv="#00f4f4f4"
-            chatview:backgroundColor="#00f4f4f4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            chatview:inputHint="Message..."/>
+        <!--<co.intentservice.chatui.ChatView-->
+            <!--android:id="@+id/chat_view"-->
+            <!--chatview:bubbleElevation="flat"-->
+            <!--chatview:backgroundSend="#00f4f4f4"-->
+            <!--chatview:sendBtnBackgroundTint="@color/colorPrimaryDark"-->
+            <!--chatview:backgroundRcv="#00f4f4f4"-->
+            <!--chatview:backgroundColor="#00f4f4f4"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--chatview:inputHint="Message..."/>-->
 
     </RelativeLayout>
 

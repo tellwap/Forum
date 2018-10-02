@@ -4,8 +4,8 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.fahamu.tech.chat.forum.adapter.MyChatAdapter;
 import com.fahamu.tech.chat.forum.adapter.AllChatAdapter;
+import com.fahamu.tech.chat.forum.adapter.MyChatAdapter;
 import com.fahamu.tech.chat.forum.model.Messages;
 import com.fahamu.tech.chat.forum.model.Post;
 import com.fahamu.tech.chat.forum.model.User;
@@ -18,9 +18,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.List;
-
-import co.intentservice.chatui.ChatView;
-import co.intentservice.chatui.models.ChatMessage;
 
 public class NoSqlDatabase {
 
@@ -46,8 +43,8 @@ public class NoSqlDatabase {
         DocumentReference document = firestore.collection(ForumC.FORUM_USER.name())
                 .document(user.getEmail());
         document.set(user, SetOptions.merge())
-                .addOnSuccessListener(aVoid -> Log.e(TAG, "successful added"))
-                .addOnFailureListener(e -> Log.e(TAG, e.getMessage()));
+                .addOnSuccessListener(aVoid -> Log.e(TAG, "successful user added"))
+                .addOnFailureListener(e -> Log.e(TAG, "Failed to add user : " + e.getMessage()));
     }
 
     public void getAllUsers(String id) {
@@ -178,58 +175,58 @@ public class NoSqlDatabase {
      * @param chatView view of the chat
      * @param senderId id of the user send the message
      */
-    public void receiveMessage(String docId, ChatView chatView, String senderId) {
-
-        firestore.collection(ForumC.FORUMS.name()).document(docId)
-                .collection(ForumC.FORUM_MESSAGE.name())
-                .orderBy("time", Query.Direction.ASCENDING)
-                .addSnapshotListener((queryDocumentSnapshots, e) -> {
-
-                    if (queryDocumentSnapshots != null) {
-
-                        for (DocumentChange documentChange : queryDocumentSnapshots.getDocumentChanges()) {
-
-                            if (documentChange.getType() == DocumentChange.Type.ADDED) {
-                                List<Messages> m = queryDocumentSnapshots.toObjects(Messages.class);
-                                chatView.clearMessages();
-                                for (Messages messages : m) {
-                                    ChatMessage chatMessage;
-                                    if (senderId.equals(messages.getSenderId())) {
-                                        chatMessage = new ChatMessage(messages.getMessage(),
-                                                Long.valueOf(messages.getTime()), ChatMessage.Type.SENT);
-                                    } else {
-                                        chatMessage = new ChatMessage(messages.getMessage(),
-                                                Long.valueOf(messages.getTime()), ChatMessage.Type.RECEIVED);
-                                    }
-                                    chatView.addMessage(chatMessage);
-                                }
-                            }
-                        }
-
-                    }
-                });
-//        collection.addSnapshotListener((queryDocumentSnapshots, e) -> {
+//    public void receiveMessage(String docId, ChatView chatView, String senderId) {
 //
-//            List<Messages> m;
+//        firestore.collection(ForumC.FORUMS.name()).document(docId)
+//                .collection(ForumC.FORUM_MESSAGE.name())
+//                .orderBy("time", Query.Direction.ASCENDING)
+//                .addSnapshotListener((queryDocumentSnapshots, e) -> {
 //
-//            if (queryDocumentSnapshots!=null){
-//                m = queryDocumentSnapshots.toObjects(Messages.class);
-//                for (Messages messages : m) {
-//                    ChatMessage chatMessage;
-//                    if (senderId.equals(messages.getSenderId())) {
-//                        chatMessage = new ChatMessage(messages.getMessage(),
-//                                Long.valueOf(messages.getTime()), ChatMessage.Type.SENT);
-//                    } else {
-//                        chatMessage = new ChatMessage(messages.getMessage(),
-//                                Long.valueOf(messages.getTime()), ChatMessage.Type.RECEIVED);
+//                    if (queryDocumentSnapshots != null) {
+//
+//                        for (DocumentChange documentChange : queryDocumentSnapshots.getDocumentChanges()) {
+//
+//                            if (documentChange.getType() == DocumentChange.Type.ADDED) {
+//                                List<Messages> m = queryDocumentSnapshots.toObjects(Messages.class);
+//                                chatView.clearMessages();
+//                                for (Messages messages : m) {
+//                                    ChatMessage chatMessage;
+//                                    if (senderId.equals(messages.getSenderId())) {
+//                                        chatMessage = new ChatMessage(messages.getMessage(),
+//                                                Long.valueOf(messages.getTime()), ChatMessage.Type.SENT);
+//                                    } else {
+//                                        chatMessage = new ChatMessage(messages.getMessage(),
+//                                                Long.valueOf(messages.getTime()), ChatMessage.Type.RECEIVED);
+//                                    }
+//                                    chatView.addMessage(chatMessage);
+//                                }
+//                            }
+//                        }
+//
 //                    }
-//
-//                    chatView.addMessage(chatMessage);
-//                }
-//            }
-//
-//        });
-    }
+//                });
+////        collection.addSnapshotListener((queryDocumentSnapshots, e) -> {
+////
+////            List<Messages> m;
+////
+////            if (queryDocumentSnapshots!=null){
+////                m = queryDocumentSnapshots.toObjects(Messages.class);
+////                for (Messages messages : m) {
+////                    ChatMessage chatMessage;
+////                    if (senderId.equals(messages.getSenderId())) {
+////                        chatMessage = new ChatMessage(messages.getMessage(),
+////                                Long.valueOf(messages.getTime()), ChatMessage.Type.SENT);
+////                    } else {
+////                        chatMessage = new ChatMessage(messages.getMessage(),
+////                                Long.valueOf(messages.getTime()), ChatMessage.Type.RECEIVED);
+////                    }
+////
+////                    chatView.addMessage(chatMessage);
+////                }
+////            }
+////
+////        });
+//    }
 
     /**
      * get all the topic available in the database

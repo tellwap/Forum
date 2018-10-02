@@ -37,4 +37,8 @@
     <string name="pay">Pay</string>
     <string name="pay_history">Receipts</string>
     <string name="logout">Logout</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="sigin_up_image">sigin up image</string>
+    <string name="term_and_conditions">Terms And Conditions</string>
+    <string name="agree_and_sign_in">Agree And Sign In</string>
 </resources>

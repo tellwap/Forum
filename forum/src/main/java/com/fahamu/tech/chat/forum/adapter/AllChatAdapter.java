@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.fahamu.tech.chat.forum.ChatActivity;
 import com.fahamu.tech.chat.forum.GetTimeAgo;
-import com.fahamu.tech.chat.forum.model.Post;
+import com.fahamu.tech.chat.forum.MyChatActivity;
 import com.fahamu.tech.chat.forum.R;
+import com.fahamu.tech.chat.forum.model.Post;
 
 import java.util.List;
 
@@ -55,7 +55,6 @@ public class AllChatAdapter extends RecyclerView.Adapter<AllChatAdapter.ViewHold
 //        instance.setTime(date);
 //        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
 //        Date date = new Date(Long.parseLong(postModal.getTime()));
-
         holder.docId.setText(postModal.getDocId());
         holder.time.setText(getTimeAgo.getTimeAgo(Long.parseLong(postModal.getTime()),context));
         Glide.with(context).load(postModal.getUserPhoto())
@@ -86,7 +85,7 @@ public class AllChatAdapter extends RecyclerView.Adapter<AllChatAdapter.ViewHold
             this.circleImageView=itemView.findViewById(R.id.profile_image);
 
             itemView.setOnClickListener(v1 -> {
-                Intent intent = new Intent(context, ChatActivity.class);
+                Intent intent = new Intent(context, MyChatActivity.class);
                 intent.putExtra("title",postTitle.getText());
                 intent.putExtra("description",postDescription.getText());
                 intent.putExtra("docId",docId.getText());

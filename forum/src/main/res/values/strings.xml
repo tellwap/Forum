@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Forum</string>
+    <string name="delete_action">delete action</string>
+    <string name="post_title">Post Title</string>
+    <string name="post_description">Post Description</string>
+    <string name="mada_mpya">Maelezo…</string>
+    <string name="mada_mpya_title">Mada…</string>
+    <string name="clock_time">12:52</string>
+    <string name="jina">Jina</string>
+    <string name="barupepe">Barupepe</string>
+    <string name="chami_epimark">Chami epimark</string>
+    <string name="description">description</string>
+    <string name="title_activity_sign_in">SignInActivity</string>
+    <string name="profile">Profile</string>
+    <string name="title_activity_my_chat">MyChatActivity</string>
+    <string name="message">Message…</string>
+    <string name="dummy_text">Lorem Ipsum is simply dummy text of the printing and
+        typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever
+        since the 1500s, when an unknown printer took a galley of type and scrambled it
+        to make a type specimen book.
+    </string>
+    <string name="buble_image">buble_image</string>
+    <string name="topic">Topic</string>
+    <string name="fullname">Fullname</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
+    <string name="address">Address</string>
+    <string name="name">Joshua Mshana</string>
+    <string name="email_example_com">email@example.com</string>
+    <string name="subscription">Subscription</string>
+    <string name="type">Type</string>
+    <string name="free">Free</string>
+</resources>

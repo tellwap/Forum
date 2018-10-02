@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.fahamu.tech.chat.forum.ChatActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:id="@+id/chat_toolbar"
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
+            android:layout_height="?actionBarSize"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        xmlns:chatview="http://schemas.android.com/apk/res-auto"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:src="@drawable/nathan"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/description"
+            android:layout_height="match_parent" />
+
+        <co.intentservice.chatui.ChatView
+            android:id="@+id/chat_view"
+            chatview:bubbleElevation="flat"
+            chatview:backgroundSend="#00f4f4f4"
+            chatview:sendBtnBackgroundTint="@color/colorPrimaryDark"
+            chatview:backgroundRcv="#00f4f4f4"
+            chatview:backgroundColor="#00f4f4f4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            chatview:inputHint="Message..."/>
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

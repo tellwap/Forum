@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="2dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!--send bubble-->
+    <android.support.v7.widget.CardView
+        android:id="@+id/chat_buble_card_send"
+        android:layout_width="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="8dp"
+        app:cardBackgroundColor="@color/message_card_color"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="8dp">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/chat_buble_image_send"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="200dp"
+                android:contentDescription="@string/buble_image"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ch" />
+
+            <TextView
+                android:id="@+id/chat_buble_mesage_send"
+                style="@style/Base.TextAppearance.AppCompat.Body2"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/dummy_text" />
+
+            <TextView
+                android:id="@+id/chat_buble_time_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:padding="4dp"
+                android:text="@string/clock_time"
+                android:textColor="@color/gray" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <!--receiver bubble-->
+    <android.support.v7.widget.CardView
+        android:id="@+id/chat_buble_card_receive"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_gravity="start"
+        android:layout_marginEnd="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="80dp"
+        android:layout_marginLeft="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/chat_buble_image_receive"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="200dp"
+                android:contentDescription="@string/buble_image"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ch" />
+
+            <TextView
+                android:id="@+id/chat_buble_mesage_receive"
+                style="@style/Base.TextAppearance.AppCompat.Body2"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/dummy_text" />
+
+            <TextView
+                android:id="@+id/chat_buble_time_receive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:padding="4dp"
+                android:textColor="@color/gray"
+                android:text="@string/clock_time" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
+
+

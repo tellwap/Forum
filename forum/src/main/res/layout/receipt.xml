@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:layout_gravity="center"
+        android:textColor="@color/white"
         android:background="@drawable/circle"
         android:text="@string/tz"
         android:textAlignment="center"

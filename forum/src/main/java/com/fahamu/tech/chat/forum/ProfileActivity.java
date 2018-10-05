@@ -2,6 +2,7 @@ package com.fahamu.tech.chat.forum;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
@@ -14,9 +15,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.fahamu.tech.chat.forum.config.Config;
 import com.fahamu.tech.chat.forum.database.NoSqlDatabase;
@@ -89,13 +94,62 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         payButton.setOnClickListener(v -> {
-            startActivity(new Intent(this, PayActivity.class));
+            payDialog();
         });
 
         updateProfileButton.setOnClickListener(v -> {
             Snackbar.make(v, "Update profile", Snackbar.LENGTH_SHORT).show();
         });
     }
+
+    private void payDialog() {
+        new MaterialDialog.Builder(this)
+                .title("Choose Package")
+                .customView(R.layout.checkout, true)
+                .positiveText("Pay")
+                .negativeText("Cancel")
+                .autoDismiss(false)
+                .canceledOnTouchOutside(false)
+                .onNegative((dialog, which) -> {
+                    Snackbar.make(payButton,
+                            "Payment Canceled", Snackbar.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                })
+                .onPositive((dialog, which) -> {
+                    View customView = dialog.getCustomView();
+                    if (customView != null) {
+                        String amount;
+                        Intent intent = new Intent(this, PayActivity.class);
+                        RadioButton month = customView.findViewById(R.id.pay_monthly);
+                        RadioButton sixMonth = customView.findViewById(R.id.pay_six_month);
+                        RadioButton year = customView.findViewById(R.id.pay_twelve_month);
+
+                        if (month.isChecked()) {
+                            amount = "10000";
+                            intent.putExtra("_amount", amount);
+                            dialog.dismiss();
+                            startActivity(intent);
+                            //Snackbar.make(customView, "Month", Snackbar.LENGTH_SHORT).show();
+                        } else if (sixMonth.isChecked()) {
+                            amount = "50000";
+                            intent.putExtra("_amount", amount);
+                            dialog.dismiss();
+                            startActivity(intent);
+                            //Snackbar.make(customView, "6 month", Snackbar.LENGTH_SHORT).show();
+                        } else if (year.isChecked()) {
+                            amount = "100000";
+                            intent.putExtra("_amount", amount);
+                            dialog.dismiss();
+                            startActivity(intent);
+                            //Snackbar.make(customView, "year", Snackbar.LENGTH_SHORT).show();
+                        } else {
+                            Snackbar.make(customView, "Choose package first", Snackbar.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .show();
+    }
+
 
     private void contactUs() {
         fab.setOnClickListener(view ->

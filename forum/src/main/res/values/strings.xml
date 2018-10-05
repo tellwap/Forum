@@ -46,4 +46,8 @@
     <string name="tzs">TZS</string>
     <string name="tz">TZ</string>
     <string name="_10000">10,000</string>
+    <string name="monthly">Monthly</string>
+    <string name="six_monthly">Six Month(50,000TZ)</string>
+    <string name="twelve_monthly">Year(100,000TZ)</string>
+    <string name="one_monthly">Month(10,000TZ)</string>
 </resources>
